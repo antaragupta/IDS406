@@ -1,0 +1,116 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-col text-center>
+      <ion-title>Sign Up</ion-title>
+    </ion-col>
+
+
+  </ion-navbar>
+
+</ion-header>
+<!-- <ion-content padding>
+    <form #form="ngForm" (ngSubmit)="signUpFormSubmit(form)" novalidate> 
+  <ion-list>
+      <ion-row>
+          <ion-col col-6>
+            <ion-item>
+                <ion-label color="primary" floating>First Name</ion-label>
+                <ion-input type="text" name="FirstName" required [(ngModel)]="userDetails.FirstName" ngControl="FirstName"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                  <ion-label color="primary" floating>Last Name</ion-label>
+                  <ion-input type="text" name="LastName" required [(ngModel)]="userDetails.LastName" ngControl="LastName"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+    <ion-item>
+        <ion-label color="primary" floating>Email ID</ion-label>
+        <ion-input type="text" required name="EmailID" [(ngModel)]="userDetails.EmailID" ngControl="EmailID"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" floating>Confirm Email ID</ion-label>
+          <ion-input type="text" required name="ConfirmEmailID" [(ngModel)]="userDetails.ConfirmEmailID" ngControl="ConfirmEmailID"></ion-input>
+        </ion-item>
+      
+      <ion-row>
+          <ion-col col-6>
+          <ion-item>
+            <ion-label color="primary" floating>Choose Password</ion-label>
+            <ion-input type="password" required name="Password" [(ngModel)]="userDetails.Password" ngControl="Password"></ion-input>
+          </ion-item>
+          </ion-col>
+              <ion-col col-6>
+          <ion-item>
+            <ion-label color="primary" floating>Confirm Password</ion-label>
+            <ion-input type="password" required name="ConfirmPassword" [(ngModel)]="userDetails.ConfirmPassword" ngControl="ConfirmPassword"></ion-input>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row center>  
+            <ion-col text-center>  
+                
+            <button ion-button  type="submit" color="dark">Sign Up</button>
+           
+          </ion-col> 
+        </ion-row>
+  </ion-list>
+  </form>
+</ion-content>-->
+
+<!-- Consultant.-->
+
+<ion-content padding>
+    <form #form="ngForm" (ngSubmit)="signUpFormSubmit(form)" novalidate> 
+  <ion-list>
+      <ion-row>
+          <ion-col col-6>
+            <ion-item>
+                <ion-label color="primary" floating>First Name</ion-label>
+                <ion-input type="text" name="FirstName" required [(ngModel)]="ConsultantDetails.FirstName" ngControl="FirstName"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                  <ion-label color="primary" floating>Last Name</ion-label>
+                  <ion-input type="text" name="LastName" required [(ngModel)]="ConsultantDetails.LastName" ngControl="LastName"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+    <ion-item>
+        <ion-label color="primary" floating>Email ID</ion-label>
+        <ion-input type="text" required name="EmailID" [(ngModel)]="ConsultantDetails.EmailID" ngControl="EmailID"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label color="primary" floating>Confirm Email ID</ion-label>
+          <ion-input type="text" required name="ConfirmEmailID" [(ngModel)]="ConsultantDetails.ConfirmEmailID" ngControl="ConfirmEmailID"></ion-input>
+        </ion-item>
+      
+      <ion-row>
+          <ion-col col-6>
+          <ion-item>
+            <ion-label color="primary" floating>Choose Password</ion-label>
+            <ion-input type="password" required name="Password" [(ngModel)]="ConsultantDetails.Password" ngControl="Password"></ion-input>
+          </ion-item>
+          </ion-col>
+              <ion-col col-6>
+          <ion-item>
+            <ion-label color="primary" floating>Confirm Password</ion-label>
+            <ion-input type="password" required name="ConfirmPassword" [(ngModel)]="ConsultantDetails.ConfirmPassword" ngControl="ConfirmPassword"></ion-input>
+          </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row center>  
+            <ion-col text-center>  
+                
+            <button ion-button  type="submit" color="dark">Sign Up</button>
+           
+          </ion-col> 
+        </ion-row>
+  </ion-list>
+  </form>
+</ion-content>
