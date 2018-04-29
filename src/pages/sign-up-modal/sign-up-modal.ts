@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 //import { Router, ActivatedRoute } from '@angular/router';
 /**
  * Generated class for the SignUpModalPage page.
@@ -15,8 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SignUpModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams) {
 
+  }
+  public openInformationModal(){
+    let modalPage3 = this.modalCtrl.create('InformationPage');
+    modalPage3.present();
   }
 
   userDetails = {
@@ -51,7 +56,7 @@ export class SignUpModalPage {
 
   }
 
-
+ 
 
 
 
