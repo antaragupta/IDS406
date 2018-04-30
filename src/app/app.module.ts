@@ -8,6 +8,20 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FirebaseService } from '../providers/firebase-service/firebase-service';
+
+import { HttpModule } from '@angular/http';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+
+const firebaseConfig={
+  apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
+  authDomain: "myapp-20845.firebaseapp.com",
+  databaseURL: "https://myapp-20845.firebaseio.com",
+  projectId: "myapp-20845",
+  storageBucket: "myapp-20845.appspot.com",
+  messagingSenderId: "828357346297"
+};
 
 @NgModule({
   declarations: [
@@ -17,6 +31,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -28,7 +45,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirebaseService
   ]
 })
 export class AppModule {}

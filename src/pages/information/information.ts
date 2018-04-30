@@ -18,6 +18,22 @@ export class InformationPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  consultant = "Basic Information";
+  /**
+   * goToDomainExpert()
+   */
+  public goToDomainExpert() {
+    this.consultant = "Domain Expert";
+  }
+  public goToBasicInformation() {
+    this.consultant = "Basic Information";
+  }
+  public goToProfile() {
+    this.consultant = "Profile";
+  }
+
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformationPage');
   }

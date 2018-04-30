@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
+import{ FirebaseService } from './../../providers/firebase-service/firebase-service';
+import{ AngularFireList } from 'angularfire2/database';
 //import { Router, ActivatedRoute } from '@angular/router';
 /**
  * Generated class for the SignUpModalPage page.
@@ -15,11 +17,12 @@ import { ModalController } from 'ionic-angular';
   templateUrl: 'sign-up-modal.html',
 })
 export class SignUpModalPage {
-
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public navParams: NavParams) {
+user: AngularFireList<any[]>;
+newUser='';
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,public firebaseService: FirebaseService) {
 
   }
-  public openInformationModal(){
+  public openInformationModal() {
     let modalPage3 = this.modalCtrl.create('InformationPage');
     modalPage3.present();
   }
@@ -32,15 +35,7 @@ export class SignUpModalPage {
     Password: '',
     ConfirmPassword: ''
   };
-  ConsultantDetails = {
-    FirstName: '',
-    LastName: '',
-    EmailID: '',
-    ConfirmEmailID: '',
-    Password: '',
-    ConfirmPassword: ''
-  };
-
+  error: string[];
   logForm(form) {
     console.log(form.value)
   }
@@ -50,14 +45,34 @@ export class SignUpModalPage {
   }
 
   signUpFormSubmit(form) {
-    //if (this.userDetails.ConfirmEmailID == this.userDetails.EmailID && this.userDetails.Password == this.userDetails.ConfirmPassword) {
-      //this.router.navigate(['home']);
+    this.error = [];
+
+    if (!(this.userDetails.EmailID != null && this.userDetails.EmailID != " ")) {
+      this.error.push("Email ID invalid");
+    }
+    if (!(this.userDetails.EmailID == this.userDetails.ConfirmEmailID)) {
+      this.error.push("Email ID doesn't match");
+    }
+    if (!(this.userDetails.Password != null && this.userDetails.Password != " ")) {
+      this.error.push("password is Invalid");
+    }
+    if (!(this.userDetails.Password == this.userDetails.ConfirmPassword)) {
+      this.error.push("password doesn't match");
+    }
+    if (!(this.userDetails.FirstName != null && this.userDetails.FirstName != " ")) {
+      this.error.push("First Name is invalid");
+    }
+    if (!(this.userDetails.LastName != null && this.userDetails.LastName != " ")) {
+      this.error.push("Last Name is invalid");
     }
 
+    if (this.error.length == 0) {
+      this.addUser(this.userDetails);
+    }
   }
 
- 
+  public addUser(user){
+    this.firebaseService.addUser(user);
+  }
 
-
-
-
+}

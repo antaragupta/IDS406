@@ -1,46 +1,181 @@
-<!--
-  Generated template for the InformationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!-- Segment in a header -->
 <ion-header>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="icons" color="secondary">
-      <ion-segment-button value="camera">
-        <ion-icon name="camera"></ion-icon>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="consultant">
+      <ion-segment-button value="Basic Information">
+        Basic Information
       </ion-segment-button>
-      <ion-segment-button value="bookmark">
-        <ion-icon name="bookmark"></ion-icon>
+      <ion-segment-button>
+        Domain Expert
+      </ion-segment-button>
+      <ion-segment-button >
+        Profile
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Segment in content -->
-  <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="friends">
-      Friends
-    </ion-segment-button>
-    <ion-segment-button value="enemies">
-      Enemies
-    </ion-segment-button>
-  </ion-segment>
+  <div [ngSwitch]="consultant">
+    <ion-list *ngSwitchCase="'Basic Information'">
+      <ion-item>
+        <ion-label floating>Company Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Short Bio</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Address 1</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
 
-  <!-- Segment in a form -->
-  <form #form="ngForm">
-    <ion-segment color="danger">
-      <ion-segment-button value="standard">
-        Standard
-      </ion-segment-button>
-      <ion-segment-button value="hybrid">
-        Hybrid
-      </ion-segment-button>
-      <ion-segment-button value="sat">
-        Satellite
-      </ion-segment-button>
-    </ion-segment>
-  </form>
+      <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>State</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Zipcode</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>LinkedIN ID</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <button ion-button  type="submit" color="dark" (click)="goToDomainExpert()">Next</button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Domain Expert'">
+
+      <ion-item>
+        <ion-label floating>Background</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Interests</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Work History</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Select your domain of expertise:</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tax Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>information Technology/Internet Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Finance Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Marketing Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Public Relations Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Human Resources Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Technical Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Accounts Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Security Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Business Development Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sales Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Risk Strategy Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Advertising Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Recruitment Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Process Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Legal Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hospitality Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Creative Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Employment Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Environmental Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Media Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Political Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Educational Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Management Consultant</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>Other</ion-label>
+        <ion-checkbox color="dark"></ion-checkbox>
+      </ion-item>
+      <button ion-button  type="submit" color="dark" (click)="goToBasicInformation()">Back</button>
+      <button ion-button  type="submit" color="dark" (click)="goToProfile()">Next</button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Profile'">
+        <button ion-button  type="submit" color="dark" (click)="goToDomainExpert()">Back</button>
+    </ion-list>
+  </div>
 </ion-content>
