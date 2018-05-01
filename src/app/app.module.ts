@@ -14,6 +14,10 @@ import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 
+import { Stripe } from '@ionic-native/stripe';
+import { Card } from '../pages/card/card';
+
+
 const firebaseConfig={
   apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
   authDomain: "myapp-20845.firebaseapp.com",
@@ -27,25 +31,27 @@ const firebaseConfig={
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    Card
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    Card
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    
+    Stripe,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseService
   ]

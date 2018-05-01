@@ -32,6 +32,8 @@
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
 
+  <p> Item price - $50 </p>
+  <button ion-button (click)="carddetails()"> Checkout </button>
   <ion-slides pager>
       <ion-slide *ngFor="let slide of slides">
           <ion-toolbar>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Card } from '../card/card';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,6 +13,10 @@ export class HomePage {
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public alertCtrl: AlertController) {
 
+  }
+
+  carddetails() {
+    this.navCtrl.push(Card);
   }
 
   public openSignInModal(){
@@ -69,3 +75,6 @@ export class BasicPage {
     }
   ];
 }
+
+
+ 
