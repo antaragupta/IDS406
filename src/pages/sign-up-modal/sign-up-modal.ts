@@ -43,33 +43,35 @@ newUser='';
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpModalPage');
   }
-
   signUpFormSubmit(form) {
     this.error = [];
-
-    if (!(this.userDetails.EmailID != null && this.userDetails.EmailID != " ")) {
+debugger;
+    if (this.userDetails.EmailID == null || this.userDetails.EmailID == "") {
       this.error.push("Email ID invalid");
     }
-    if (!(this.userDetails.EmailID == this.userDetails.ConfirmEmailID)) {
+    if (this.userDetails.EmailID != this.userDetails.ConfirmEmailID) {
       this.error.push("Email ID doesn't match");
     }
-    if (!(this.userDetails.Password != null && this.userDetails.Password != " ")) {
+    if (this.userDetails.Password == null || this.userDetails.Password == "") {
       this.error.push("password is Invalid");
     }
-    if (!(this.userDetails.Password == this.userDetails.ConfirmPassword)) {
+    if (this.userDetails.Password != this.userDetails.ConfirmPassword) {
       this.error.push("password doesn't match");
     }
-    if (!(this.userDetails.FirstName != null && this.userDetails.FirstName != " ")) {
+    if (this.userDetails.FirstName == null || this.userDetails.FirstName == "") {
       this.error.push("First Name is invalid");
     }
-    if (!(this.userDetails.LastName != null && this.userDetails.LastName != " ")) {
+    if (this.userDetails.LastName == null || this.userDetails.LastName == "") {
       this.error.push("Last Name is invalid");
     }
+
+    console.log(this.error.length);
 
     if (this.error.length == 0) {
       this.addUser(this.userDetails);
     }
   }
+
 
   public addUser(user){
     this.firebaseService.addUser(user);
