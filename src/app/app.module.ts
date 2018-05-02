@@ -15,8 +15,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 
 import { Stripe } from '@ionic-native/stripe';
+import { AuthService } from '../providers/auth-service/auth-service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
-const firebaseConfig={
+const firebaseConfig = {
   apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
   authDomain: "myapp-20845.firebaseapp.com",
   databaseURL: "https://myapp-20845.firebaseio.com",
@@ -46,10 +48,12 @@ const firebaseConfig={
   ],
   providers: [
     StatusBar,
+    AuthService,
     SplashScreen,
     Stripe,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseService
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    FirebaseService,
+    AngularFireAuth
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -3,13 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { FirebaseService } from './../../providers/firebase-service/firebase-service';
 import { AngularFireList } from 'angularfire2/database';
-//import { Router, ActivatedRoute } from '@angular/router';
-/**
- * Generated class for the SignUpModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthService } from './../../providers/auth-service/auth-service';
 
 @IonicPage()
 @Component({
@@ -19,7 +13,7 @@ import { AngularFireList } from 'angularfire2/database';
 export class SignUpModalPage {
   user: AngularFireList<any[]>;
   newUser = '';
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService) {
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService) {
 
   }
   public openInformationModal() {
@@ -31,9 +25,7 @@ export class SignUpModalPage {
     FirstName: '',
     LastName: '',
     EmailID: '',
-
-    Password: '',
-
+    Password: ''
   };
   userDetails_Confirm = {
     ConfirmEmailID: '',
@@ -49,7 +41,7 @@ export class SignUpModalPage {
   }
   signUpFormSubmit(form) {
     this.error = [];
-    
+
     if (this.userDetails.EmailID == null || this.userDetails.EmailID == "") {
       this.error.push("Email ID invalid");
     }
@@ -70,7 +62,6 @@ export class SignUpModalPage {
     }
 
     console.log(this.error.length);
-debugger;
     if (this.error.length == 0) {
       this.getUserlist();
       let emailFlag = false;
@@ -80,23 +71,26 @@ debugger;
         }
       }
       if (!emailFlag) {
-        this.addUser(this.userDetails);
-        console.log("user Added");
+        this.authService.signUpWithEmail(this.userDetails.EmailID, this.userDetails.Password)
+          .then(() => {
+            console.log('');
+          }).catch(_error => {
+            this.error = _error
+            console.log('');
+          });
       }
-      else {
-        this.error.push("Email ID already exists");
-        console.error(this.error);
-      }
-
+      console.log("user Added");
     }
+    else {
+      this.error.push("Email ID already exists");
+      console.error(this.error);
+    }
+
   }
+
 
   public getUserlist() {
     this.userList = this.firebaseService.getUser();
-  }
-
-  public addUser(user) {
-    this.firebaseService.addUser(user);
   }
 
 }
