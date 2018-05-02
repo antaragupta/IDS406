@@ -19,54 +19,60 @@ export class SignInModalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService) {
   }
+  public userList;
   userInputDetails = {
     EmailID: '',
     Password: ''
   };
+  error1: string[];
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInModalPage');
   }
-
-}
-
- signInFormSubmit(form) {
-  this.error = [];
-
-  if (this.userInputDetails.EmailID == null || this.userInputDetails.EmailID == "") {
-    this.error.push("Email ID invalid");
-  }
-
-  if (this.userInputDetails.Password == null || this.userInputDetails.Password == "") {
-    this.error.push("password is Invalid");
-  }
-
-  console.log(this.error.length);
-  if (this.error.length == 0) {
-    this.getUserlist();
-    let emailFlag = false;
-    for (let i = 1; i <= this.userList.length; i++) {
-      if (this.userList[i].EmailID != this.userInputDetails.EmailID) {
-        emailFlag = true;
+  signInFormSubmit(form) {
+    this.error1 = [];
+  
+    if (this.userInputDetails.EmailID == null || this.userInputDetails.EmailID == "") {
+      this.error1.push("Email ID invalid");
+    }
+  
+    if (this.userInputDetails.Password == null || this.userInputDetails.Password == "") {
+      this.error1.push("password is Invalid");
+    }
+  
+    console.log(this.error1.length);
+    if (this.error1.length == 0) {
+      this.getUserlist();
+      let emailFlag = false;
+      for (let i = 1; i <= this.userList.length; i++) {
+        if (this.userList[i].EmailID != this.userInputDetails.EmailID) {
+          emailFlag = true;
+        }
       }
+      if (!emailFlag) {
+        this.authService.loginWithEmail(this.userInputDetails.EmailID, this.userInputDetails.Password)
+          .then(() => {
+            console.log('');
+          }).catch(_error => {
+            this.error1= _error
+            console.log('');
+          });
+      }
+      console.log("Login Successful");
     }
-    if (!emailFlag) {
-      this.authService.signInWithEmailAndPassword(this.userInputDetails.EmailID, this.userInputDetails.Password)
-        .then(() => {
-          console.log('');
-        }).catch(_error => {
-          this.error = _error
-          console.log('');
-        });
+    else {
+      this.error1.push("Email ID doesn't match");
+      console.error(this.error1);
     }
-    console.log("Login Successful");
+  
   }
-  else {
-    this.error.push("Email ID doesn't match");
-    console.error(this.error);
+  
+  public getUserlist() {
+    this.userList = this.firebaseService.getUser();
   }
 
 }
+  
 
 
-
-
+ 

@@ -2,36 +2,68 @@
   <ion-navbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-2>
           <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
           </button>
           <ion-title>Home</ion-title>
         </ion-col>
-        <ion-col col-4></ion-col>
-        <ion-col col-4>
-          <button ion-button icon-left item-right (click)="openSignInModal()">
+        <ion-col col-6>
+            <ion-searchbar
+            [(ngModel)]="myInput"
+            [showCancelButton]="shouldShowCancel"
+            (ionInput)="onInput($event)"
+            (ionCancel)="onCancel($event)">
+          </ion-searchbar>
+        </ion-col>
+        <ion-col col-2>
+
+        </ion-col>
+        <ion-col col-2>
+            <button ion-button *ngIf="!status"  (click)="openSignInModal()" >Sign In</button> 
+            <button ion-button *ngIf="status"  (click)="signout()" >Sign Out</button>  
+         <!-- <button ion-button icon-left item-right (click)="openSignInModal()">
             Sign In
-          </button>
-          <button ion-button icon-left item-right (click)="showConfirm()">
-              Sign Up
-            </button>
+          </button>-->
+          <button ion-button icon-left item-right (click)="showConfirm()">Sign Up</button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
+<ion-content padding >
+    <ion-grid>
+      <ion-row>
+      <ion-col col-4.75>
+          <ion-navbar   >
+              <ion-title></ion-title>
+          </ion-navbar>
+      </ion-col>
+        <ion-col col-2.5>
+    <ion-navbar  color="primary" >
+        <ion-title>Welcome to SellsTivity</ion-title>
+    </ion-navbar>
+  
+    
+    </ion-col>
+   
+    <ion-col col-4.75>
+        <ion-navbar  >
+            <ion-title></ion-title>
+        </ion-navbar>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+  
+<ion-row>
+  <p></p>
+</ion-row>
+<ion-row>
   <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
+
   </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-
+</ion-row>
   <p> Item price - $50 </p>
   <button ion-button (click)="carddetails()"> Checkout </button>
   <ion-slides pager>
@@ -43,7 +75,7 @@
           </ion-toolbar>
         
         <img [src]="slide.image" class="slide-image"/>
-        <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+        <h1 class="slide-title" [innerHTML]="slide.title"></h1>
         <p [innerHTML]="slide.description"></p>
       </ion-slide>
       <ion-slide>

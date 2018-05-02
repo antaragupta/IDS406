@@ -3,30 +3,40 @@ import { NavController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Card } from '../card/card';
-
+import { FirebaseService } from './../../providers/firebase-service/firebase-service';
+import { AngularFireList } from 'angularfire2/database';
+import { AuthService } from './../../providers/auth-service/auth-service';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class HomePage {
-
+  status: boolean = false;
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public alertCtrl: AlertController) {
 
   }
-
+  error1: string[];
   carddetails() {
     this.navCtrl.push(Card);
   }
 
   public openSignInModal(){
     let modalPage = this.modalCtrl.create('SignInModalPage');
+    this.status = true;
     modalPage.present();
   }
   public openClientSignModal(){
     let modalPage1 = this.modalCtrl.create('SignUpModalPage');
     modalPage1.present();
   }
+  public signout(){
+   
+   
+    console.log("Signout");
+    this.status = false;
+  }
+
   public openConsultantSignModal(){
     let modalPage2 = this.modalCtrl.create('SignUpModalPage');
     modalPage2.present();
@@ -54,12 +64,9 @@ export class HomePage {
     });
     confirm.present();
   }
-}
-
-export class BasicPage {
   slides = [
     {
-      title: "Welcome to the Docs!",
+      title: "Welcome to SellsTivity!",
       description: "The <b>Ionic Component Documentation</b> showcases a number of useful components that are included out of the box with Ionic.",
       image: "assets/img/ica-slidebox-img-1.png",
     },
@@ -75,6 +82,7 @@ export class BasicPage {
     }
   ];
 }
+
 
 
  

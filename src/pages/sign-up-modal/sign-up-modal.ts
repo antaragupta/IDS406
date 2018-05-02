@@ -20,7 +20,7 @@ export class SignUpModalPage {
     let modalPage3 = this.modalCtrl.create('InformationPage');
     modalPage3.present();
   }
-  userList;
+ public userList;
   userDetails = {
     FirstName: '',
     LastName: '',
