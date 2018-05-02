@@ -15,8 +15,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 
 import { Stripe } from '@ionic-native/stripe';
-import { Card } from '../pages/card/card';
-
 
 const firebaseConfig={
   apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
@@ -31,8 +29,7 @@ const firebaseConfig={
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
-    Card
+    ListPage
   ],
   imports: [
     BrowserModule,
@@ -45,8 +42,7 @@ const firebaseConfig={
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    Card
+    ListPage
   ],
   providers: [
     StatusBar,
