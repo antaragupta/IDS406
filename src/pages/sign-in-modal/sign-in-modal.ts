@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseService } from './../../providers/firebase-service/firebase-service';
 import { AngularFireList } from 'angularfire2/database';
 import { AuthService } from './../../providers/auth-service/auth-service';
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the SignInModalPage page.
  *
@@ -17,7 +18,7 @@ import { AuthService } from './../../providers/auth-service/auth-service';
 })
 export class SignInModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService,public alertCtrl: AlertController) {
   }
   public userList;
   userInputDetails = {
@@ -29,6 +30,23 @@ export class SignInModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignInModalPage');
   }
+  public signInApproved() {
+    let confirm = this.alertCtrl.create({
+      title: 'Log In ',
+      message: 'Log In Succesful',
+    });
+    
+    confirm.present();
+  }
+  public signInRejected() {
+    let confirm = this.alertCtrl.create({
+      title: 'Log In ',
+      message: 'Log In UnSuccesful',
+    });
+    
+    confirm.present();
+  }
+  
   signInFormSubmit(form) {
     this.error1 = [];
   
@@ -43,13 +61,13 @@ export class SignInModalPage {
     console.log(this.error1.length);
     if (this.error1.length == 0) {
       this.getUserlist();
-      let emailFlag = false;
+      let emailFlag = true;
       for (let i = 1; i <= this.userList.length; i++) {
         if (this.userList[i].EmailID != this.userInputDetails.EmailID) {
-          emailFlag = true;
+          emailFlag = false;
         }
       }
-      if (!emailFlag) {
+      if (emailFlag) {
         this.authService.loginWithEmail(this.userInputDetails.EmailID, this.userInputDetails.Password)
           .then(() => {
             console.log('');
@@ -57,12 +75,15 @@ export class SignInModalPage {
             this.error1= _error
             console.log('');
           });
+
       }
       console.log("Login Successful");
+      this.signInApproved();
     }
     else {
       this.error1.push("Email ID doesn't match");
       console.error(this.error1);
+this.signInRejected();
     }
   
   }

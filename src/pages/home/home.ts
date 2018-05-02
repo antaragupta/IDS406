@@ -66,19 +66,19 @@ export class HomePage {
   }
   slides = [
     {
-      title: "Welcome to SellsTivity!",
-      description: "The <b>Ionic Component Documentation</b> showcases a number of useful components that are included out of the box with Ionic.",
-      image: "assets/img/ica-slidebox-img-1.png",
+      title: "Welcome to SALESTIVITY!",
+      description: " <b>One</b> single platform for Clients and Consultants.",
+      image: "assets/imgs/slide1.png",
     },
     {
-      title: "What is Ionic?",
-      description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
-      image: "assets/img/ica-slidebox-img-2.png",
+      title: "Billing Options",
+      description: "<b>Start your free trial today!</b> <p>Choose the right plan for you and your company.</p>",
+      image: "assets/imgs/icon-credit-card.png",
     },
     {
-      title: "What is Ionic Cloud?",
-      description: "The <b>Ionic Cloud</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
-      image: "assets/img/ica-slidebox-img-3.png",
+      title: "Search for the PERFECT person to take your business to the next level.",
+      description: " <b>SalesTivity</b> is a commom platform for managing and scaling Business at any level.",
+      image: "assets/imgs/slide3.png",
     }
   ];
 }
