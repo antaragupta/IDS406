@@ -14,6 +14,7 @@
 
 
 <ion-content padding>
+    <form #form="ngForm" (ngSubmit)="signInFormSubmit(form)" novalidate>
   <ion-list>
 
     <ion-item>
@@ -27,10 +28,11 @@
     </ion-item>
     <ion-row center>  
         <ion-col text-center>   
-        <button ion-button outline padding-left>Sign In</button>
+        <button ion-button outline padding-left >Sign In</button>
       </ion-col> 
     </ion-row>
       
    
   </ion-list>
+  </form>
 </ion-content>
