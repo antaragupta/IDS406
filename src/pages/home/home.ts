@@ -41,6 +41,7 @@ export class HomePage {
     let modalPage2 = this.modalCtrl.create('SignUpModalPage');
     modalPage2.present();
   }
+  typeOfUser="client";
   public showConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Type of User',
@@ -51,6 +52,7 @@ export class HomePage {
           handler: () => {
             this.openClientSignModal();
             console.log('I am a client');
+            this.typeOfUser="client";
           }
         },
         {
@@ -58,6 +60,7 @@ export class HomePage {
           handler: () => {
             this.openConsultantSignModal()
             console.log('I am a consultant');
+            this.typeOfUser="consultant";
           }
         }
       ]

@@ -18,6 +18,7 @@ import { Stripe } from '@ionic-native/stripe';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
   authDomain: "myapp-20845.firebaseapp.com",
