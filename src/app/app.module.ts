@@ -24,6 +24,12 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { StripeJavaScriptPage } from '../pages/stripe-java-script/stripe-java-script';
 import { StripeNativePage } from '../pages/stripe-native/stripe-native';
 
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAefODCeCo740GYKnhuxQsuiCGTG3OAIuY",
   authDomain: "myapp-20845.firebaseapp.com",
@@ -70,7 +76,11 @@ const appRoutes: Routes = [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseService,
     AngularFireAuth,
-    GlobalVarsProvider
+    GlobalVarsProvider,
+    FileTransfer,
+  FileTransferObject,
+  File,
+  Camera
   ]
 })
 export class AppModule { }
