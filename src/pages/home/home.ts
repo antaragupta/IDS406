@@ -1,47 +1,56 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { ModalController, AlertController, NavController } from 'ionic-angular';
 import { Card } from '../card/card';
-import { FirebaseService } from './../../providers/firebase-service/firebase-service';
-import { AngularFireList } from 'angularfire2/database';
 import { AuthService } from './../../providers/auth-service/auth-service';
+import { GlobalVarsProvider } from './../../providers/global-vars/global-vars';
+
+import { StripeJavaScriptPage } from './../stripe-java-script/stripe-java-script';
+import { StripeNativePage } from '../stripe-native/stripe-native';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class HomePage {
-  status: boolean = false;
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public alertCtrl: AlertController, public globalVars: GlobalVarsProvider, public authService: AuthService) {}
 
-  }
   error1: string[];
   carddetails() {
     this.navCtrl.push(Card);
   }
 
-  public openSignInModal(){
+  openJavaScript(){
+    this.navCtrl.push(StripeJavaScriptPage)
+  }
+ 
+  openNative(){
+    this.navCtrl.push(StripeNativePage)
+  }
+  
+  public openSignInModal() {
     let modalPage = this.modalCtrl.create('SignInModalPage');
-    this.status = true;
     modalPage.present();
   }
-  public openClientSignModal(){
+
+  public openClientSignModal() {
     let modalPage1 = this.modalCtrl.create('SignUpModalPage');
     modalPage1.present();
   }
-  public signout(){
-   
-   
+
+  public signout() {
+    this.authService.signOut();
+    this.globalVars.authStateReset();
     console.log("Signout");
-    this.status = false;
   }
 
-  public openConsultantSignModal(){
+  public openConsultantSignModal() {
     let modalPage2 = this.modalCtrl.create('SignUpModalPage');
     modalPage2.present();
   }
-  typeOfUser="client";
+
+  typeOfUser = "client";
+
   public showConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Type of User',
@@ -52,7 +61,7 @@ export class HomePage {
           handler: () => {
             this.openClientSignModal();
             console.log('I am a client');
-            this.typeOfUser="client";
+            this.globalVars.typeOfUser = "client";
           }
         },
         {
@@ -60,13 +69,14 @@ export class HomePage {
           handler: () => {
             this.openConsultantSignModal()
             console.log('I am a consultant');
-            this.typeOfUser="consultant";
+            this.globalVars.typeOfUser = "consultant";
           }
         }
       ]
     });
     confirm.present();
   }
+
   slides = [
     {
       title: "Welcome to SALESTIVITY!",
@@ -85,7 +95,3 @@ export class HomePage {
     }
   ];
 }
-
-
-
- 

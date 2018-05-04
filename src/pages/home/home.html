@@ -9,87 +9,75 @@
           <ion-title>Home</ion-title>
         </ion-col>
         <ion-col col-6>
-            <ion-searchbar
-            [(ngModel)]="myInput"
-            [showCancelButton]="shouldShowCancel"
-            (ionInput)="onInput($event)"
-            (ionCancel)="onCancel($event)">
+          <ion-searchbar [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
           </ion-searchbar>
         </ion-col>
         <ion-col col-2>
 
         </ion-col>
         <ion-col col-2>
-            <button ion-button *ngIf="!status"  (click)="openSignInModal()" >Sign In</button> 
-            <button ion-button *ngIf="status"  (click)="signout()" >Sign Out</button>  
-         <!-- <button ion-button icon-left item-right (click)="openSignInModal()">
-            Sign In
-          </button>-->
-          <button ion-button icon-left item-right (click)="showConfirm()">Sign Up</button>
+          <button ion-button *ngIf="!globalVars.authState.I" (click)="openSignInModal()">Sign In</button>
+          <button ion-button *ngIf="globalVars.authState.I" (click)="signout()">Sign Out</button>
+
+          <button ion-button icon-left item-right *ngIf="!globalVars.authState.I" (click)="showConfirm()">Sign Up</button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding >
-    <ion-grid>
-      <ion-row>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
       <ion-col col-4.75>
-          <ion-navbar   >
-              <ion-title></ion-title>
-          </ion-navbar>
+        <ion-navbar>
+          <ion-title></ion-title>
+        </ion-navbar>
       </ion-col>
-        <ion-col col-2.5>
-    <ion-navbar  color="primary" >
-        <ion-title>Welcome to SalesTivity</ion-title>
-    </ion-navbar>
-  
-    
-    </ion-col>
-   
-    <ion-col col-4.75>
-        <ion-navbar  >
-            <ion-title></ion-title>
+      <ion-col col-2.5>
+        <ion-navbar color="primary">
+          <ion-title>Welcome to SalesTivity</ion-title>
+        </ion-navbar>
+
+
+      </ion-col>
+
+      <ion-col col-4.75>
+        <ion-navbar>
+          <ion-title></ion-title>
         </ion-navbar>
       </ion-col>
     </ion-row>
-    </ion-grid>
-  
-<ion-row>
-  <p></p>
-</ion-row>
-<ion-row>
-  <p>
+  </ion-grid>
 
-  </p>
-</ion-row>
-  <p> Item price - $50 </p>
-  <button ion-button (click)="carddetails()"> Checkout </button>
-  <ion-slides pager>
-      <ion-slide *ngFor="let slide of slides">
-          <ion-toolbar>
-            <ion-buttons end>
-              <button ion-button color="primary">Skip</button>
-            </ion-buttons>
-          </ion-toolbar>
-          <h1 class="slide-title" [innerHTML]="slide.title"></h1>
-        <img [src]="slide.image" class="slide-image"/>
-        
-        <p [innerHTML]="slide.description"></p>
-      </ion-slide>
-      <ion-slide>
-        <ion-toolbar>
-        </ion-toolbar>
-       <!-- <img src="assets/imgs/slide4.png"  width="100" height="200" class="slide-image"/>-->
-        <h2 class="slide-title">Let's make Clients and Consultants meet!</h2>
-        <button ion-button large clear icon-end color="primary">
-          Continue to the Website!
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-      </ion-slide>
-    </ion-slides>
-  </ion-content>
+  <ion-row>
+    <p></p>
+  </ion-row>
+  <ion-row>
+    <p>
 
-   
+    </p>
+  </ion-row>
+ 
+  <ion-slides autoplay=3000 loop=true pager>
+    <ion-slide *ngFor="let slide of slides">
+      
+      <h1 class="slide-title" [innerHTML]="slide.title"></h1>
+      <img [src]="slide.image" class="slide-image" />
 
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <!-- <img src="assets/imgs/slide4.png"  width="100" height="200" class="slide-image"/>-->
+      <h2 class="slide-title">Let's make Clients and Consultants meet!</h2>
+      <button ion-button large clear icon-end color="primary">
+        Continue to the Website!
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+  <button ion-button large full (click)="openJavaScript()">Stripe JavaScript</button>
+  <button ion-button large full (click)="openNative()">Stripe Native</button>
+</ion-content>

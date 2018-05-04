@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,ViewController } from 'ionic-angular';
 import { FirebaseService } from './../../providers/firebase-service/firebase-service';
 import { AngularFireList } from 'angularfire2/database';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { AlertController } from 'ionic-angular';
-/**
- * Generated class for the SignInModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { GlobalVarsProvider } from './../../providers/global-vars/global-vars';
+
 
 @IonicPage()
 @Component({
@@ -18,82 +14,84 @@ import { AlertController } from 'ionic-angular';
 })
 export class SignInModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService,public alertCtrl: AlertController) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService, public alertCtrl: AlertController, public globalVars: GlobalVarsProvider,public toastCtrl: ToastController,public viewCtrl: ViewController) { }
+
   public userList;
   userInputDetails = {
-    EmailID: '',
-    Password: ''
+    emailID: '',
+    password: ''
   };
+
   error1: string[];
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInModalPage');
-  }
+
   public signInApproved() {
-    let confirm = this.alertCtrl.create({
-      title: 'Log In ',
-      message: 'Log In Succesful',
-    });
-    
-    confirm.present();
+    this.viewCtrl.dismiss();
+    this.toastCtrl.create({
+      message:"Welcome User!",
+      showCloseButton:true,
+      closeButtonText:"OK"
+    }).present();
   }
   public signInRejected() {
-    let confirm = this.alertCtrl.create({
-      title: 'Log In ',
-      message: 'Log In UnSuccesful',
-    });
-    
-    confirm.present();
+    this.viewCtrl.dismiss();
+    this.toastCtrl.create({
+      message:"Sign In Unsuccessful, Please try again!",
+      showCloseButton:true,
+      closeButtonText:"OK"
+    }).present();
   }
-  
+
+  // this.toastCtrl.create({
+  //   message:"You have been Signed Up Successfully! Please LogIn now",
+  //   showCloseButton:true,
+  //   closeButtonText:"OK"
+  // }).present();
+
   signInFormSubmit(form) {
     this.error1 = [];
-  
-    if (this.userInputDetails.EmailID == null || this.userInputDetails.EmailID == "") {
+
+    if (this.userInputDetails.emailID == null || this.userInputDetails.emailID == "") {
       this.error1.push("Email ID invalid");
     }
-  
-    if (this.userInputDetails.Password == null || this.userInputDetails.Password == "") {
+
+    if (this.userInputDetails.password == null || this.userInputDetails.password == "") {
       this.error1.push("password is Invalid");
     }
-  
+
     console.log(this.error1.length);
     if (this.error1.length == 0) {
       this.getUserlist();
       let emailFlag = true;
       for (let i = 1; i <= this.userList.length; i++) {
-        if (this.userList[i].EmailID != this.userInputDetails.EmailID) {
+        if (this.userList[i].EmailID != this.userInputDetails.emailID) {
           emailFlag = false;
         }
       }
       if (emailFlag) {
-        this.authService.loginWithEmail(this.userInputDetails.EmailID, this.userInputDetails.Password)
+
+        this.authService.loginWithEmail(this.userInputDetails.emailID, this.userInputDetails.password)
           .then(() => {
-            console.log('');
+            debugger;
+            console.log("Login Successful");
+            if(this.globalVars.authState.I){
+              this.signInApproved();
+            }
           }).catch(_error => {
-            this.error1= _error
+            this.error1 = _error
             console.log('');
+            this.signInRejected();
           });
 
       }
-      console.log("Login Successful");
-      this.signInApproved();
     }
     else {
       this.error1.push("Email ID doesn't match");
       console.error(this.error1);
-this.signInRejected();
+      this.signInRejected();
     }
-  
   }
-  
+
   public getUserlist() {
     this.userList = this.firebaseService.getUser();
   }
-
 }
-  
-
-
- 

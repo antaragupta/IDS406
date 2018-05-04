@@ -1,12 +1,10 @@
-
-
 <ion-header>
 
-  <ion-navbar >
-      <ion-col text-center>   
-          <ion-title>Sign In</ion-title>
-        </ion-col> 
-    
+  <ion-navbar>
+    <ion-col text-center>
+      <ion-title>Sign In</ion-title>
+    </ion-col>
+
 
   </ion-navbar>
 
@@ -14,25 +12,24 @@
 
 
 <ion-content padding>
-    <form #form="ngForm" (ngSubmit)="signInFormSubmit(form)" novalidate>
-  <ion-list>
+  <form #form="ngForm" (ngSubmit)="signInFormSubmit(form)" novalidate>
+    <ion-list>
 
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Email ID</ion-label>
+        <ion-input type="text" name="emailID" required [(ngModel)]="userInputDetails.emailID" ngControl="emailID"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" name="password" required [(ngModel)]="userInputDetails.password" ngControl="password"></ion-input>
+      </ion-item>
+      <ion-row center>
+        <ion-col text-center>
+          <button ion-button outline padding-left>Sign In</button>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-row center>  
-        <ion-col text-center>   
-        <button ion-button outline padding-left >Sign In</button>
-      </ion-col> 
-    </ion-row>
-      
-   
-  </ion-list>
+
+    </ion-list>
   </form>
 </ion-content>

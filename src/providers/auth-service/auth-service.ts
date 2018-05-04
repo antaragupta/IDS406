@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { GlobalVarsProvider } from './../../providers/global-vars/global-vars';
 
 @Injectable()
 export class AuthService {
 
   authState: any = null;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, public globalVars: GlobalVarsProvider) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
     });
@@ -41,7 +42,7 @@ export class AuthService {
   signUpWithEmail(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
+        this.authState = user;
       })
       .catch(error => {
         console.log(error)
@@ -52,10 +53,10 @@ export class AuthService {
   loginWithEmail(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
+        this.globalVars.authState = user;
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
         throw error
       });
   }

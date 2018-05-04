@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { AccountsPage } from './../../pages/accounts/accounts';
+import { Router } from '@angular/router';
 /**
  * Generated class for the InformationPage page.
  *
@@ -14,8 +15,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'information.html',
 })
 export class InformationPage {
+accountsPage=AccountsPage;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public router: Router) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   consultant = "Basic Information";
@@ -31,7 +33,10 @@ export class InformationPage {
   public goToProfile() {
     this.consultant = "Profile";
   }
-
+public proceed(){
+  this.navCtrl.push(this.accountsPage);
+  //this.router.navigate(["accounts"]);
+}
 
 
   ionViewDidLoad() {

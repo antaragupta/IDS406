@@ -1,50 +1,55 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
+import { IonicPage, NavParams, ToastController, ViewController, ModalController } from 'ionic-angular';
 import { FirebaseService } from './../../providers/firebase-service/firebase-service';
 import { AngularFireList } from 'angularfire2/database';
 import { AuthService } from './../../providers/auth-service/auth-service';
-import { HomePage} from './../../pages/home/home';
+import { GlobalVarsProvider } from './../../providers/global-vars/global-vars';
+
 @IonicPage()
 @Component({
   selector: 'page-sign-up-modal',
   templateUrl: 'sign-up-modal.html',
 })
+
 export class SignUpModalPage {
   user: AngularFireList<any[]>;
   newUser = '';
-  constructor(public modalCtrl: ModalController, public homePage: HomePage, public navParams: NavParams, public firebaseService: FirebaseService, public authService: AuthService,public toastCtrl: ToastController,public viewCtrl: ViewController) {
+  constructor(public modalCtrl: ModalController, public navParams: NavParams, 
+    public firebaseService: FirebaseService, public authService: AuthService, 
+    public toastCtrl: ToastController, public viewCtrl: ViewController,
+    public globalVars: GlobalVarsProvider) { }
 
-  }
   public openInformationModal() {
     let modalPage3 = this.modalCtrl.create('InformationPage');
     modalPage3.present();
   }
+
   public signUpSuccessful() {
-    this.toastCtrl.create({
-      message:"You have been Signed Up Successfully! Please LogIn now",
-      showCloseButton:true,
-      closeButtonText:"OK"
-    }).present();
-    
     this.viewCtrl.dismiss();
+    this.toastCtrl.create({
+      message: "You have been Signed Up Successfully! Please LogIn now",
+      showCloseButton: true,
+      closeButtonText: "OK"
+    }).present();
   }
+
   public signUpFailed() {
-    this.toastCtrl.create({
-      message:"Sign Up failed! Please try again.",
-      showCloseButton:true,
-      closeButtonText:"OK"
-    }).present();
-    
     this.viewCtrl.dismiss();
+
+    this.toastCtrl.create({
+      message: "Sign Up failed! Please try again.",
+      showCloseButton: true,
+      closeButtonText: "OK"
+    }).present();
   }
- public userList;
+
+  public userList;
   userDetails = {
     FirstName: '',
     LastName: '',
     EmailID: '',
     Password: '',
-    typeOfUser:''
+    typeOfUser: ''
   };
   userDetails_Confirm = {
     ConfirmEmailID: '',
@@ -55,12 +60,9 @@ export class SignUpModalPage {
     console.log(form.value)
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpModalPage');
-  }
   signUpFormSubmit(form) {
     this.error = [];
-this.userDetails.typeOfUser=this.homePage.typeOfUser;
+    this.userDetails.typeOfUser = this.globalVars.typeOfUser;
     if (this.userDetails.EmailID == null || this.userDetails.EmailID == "") {
       this.error.push("Email ID invalid");
     }
@@ -95,6 +97,11 @@ this.userDetails.typeOfUser=this.homePage.typeOfUser;
             debugger;
             console.log('');
             this.signUpSuccessful();
+
+            if(this.globalVars.typeOfUser=="consultant"){
+              this.openInformationModal();
+            }
+           
           }).catch(_error => {
             this.error = _error
             console.log('');
@@ -107,12 +114,9 @@ this.userDetails.typeOfUser=this.homePage.typeOfUser;
       this.error.push("Email ID already exists");
       console.error(this.error);
     }
-
   }
-
 
   public getUserlist() {
     this.userList = this.firebaseService.getUser();
   }
-
 }

@@ -1,0 +1,83 @@
+<!--
+  Generated template for the AccountsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Accounts</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Accounts</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Add New Client</ion-label>
+        <ion-select [(ngModel)]="gaming">
+          <ion-option value="Add New Session">Add New Session</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Edit Existing Client</ion-label>
+        <ion-select [(ngModel)]="gaming">
+          <ion-option></ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>History</ion-label>
+        <ion-select [(ngModel)]="gaming">
+          <ion-option value="7D">7 Days</ion-option>
+          <ion-option value="30D">30 Days</ion-option>
+          <ion-option value="3M">3 Months</ion-option>
+          <ion-option value="6M">6 Months</ion-option>
+          <ion-option value="1Y">Past Year</ion-option>
+          <ion-option value="All">All</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Payment Overview</ion-label>
+        <ion-select [(ngModel)]="gaming">
+          <ion-option></ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Membership Management</ion-label>
+        <ion-select [(ngModel)]="gaming">
+          <ion-option></ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <button ion-item (click)="closeMenu()">
+      Contact Support
+    </button>
+
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
